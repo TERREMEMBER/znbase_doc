@@ -2,7 +2,7 @@
 
 ## 3. Installation and Deployment
 
-### **3.1 **Software and hardware environment requirements
+### 3.1 Software and hardware environment requirements
 
 ZNBase is a distributed database product created by Inspur, with features such as strong consistency, highly available distributed architecture, distributed horizontal expansion, high performance, and enterprise-level security. It can be deployed and run in X86 architecture server environment, ARM architecture server environment and mainstream virtualization environment, and supports most mainstream hardware networks.
 
@@ -60,10 +60,10 @@ Check the consistency of the operating system version in each node of the cluste
 #lsb_release –a 
 
 > No LSB modules are available. 
->            Distributor ID: Ubuntu 
->            Description: Ubuntu 16.04.6 LTS 
->            Release: 16.04 
->            Codename: xenial 
+> Distributor ID: Ubuntu 
+> Description: Ubuntu 16.04.6 LTS 
+> Release: 16.04 
+> Codename: xenial 
 
 #### 3.2.2 The system time of the nodes in the cluster is consistent
 
@@ -72,9 +72,8 @@ A medium-strength clock synchronization mechanism is required in cluster nodes t
 #### 3.2.3 Whether the default port of the database service is occupied
 
 #lsof -i:26257 
-
 > COMMAND     PID  USER   FD   TYPE  DEVICE SIZE/OFF NODE NAME 
->            drdb 10583 jesse   12u  IPv6 3263391      0t0  TCP *:26257 (LISTEN)
+> drdb 10583 jesse   12u  IPv6 3263391      0t0  TCP *:26257 (LISTEN)
 
 If the port number conflicts with the database default port number, you can use the kill -9 pid_value command under the root user to terminate the conflicting process or modify the default port number when installing the database.
 
