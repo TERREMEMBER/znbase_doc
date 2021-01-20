@@ -79,7 +79,7 @@ If the port number conflicts with the database default port number, you can use 
 
 #### 3.2.4 Modify Linux system file handle limit
 
-The database uses a large number of file handles, which usually exceeds the number of file handles available in LINUX by default. Therefore, it is recommended to modify the number of file handles for each database node: the maximum number of file handles needs to be set to at least 1956 (each store requires 1700 file handles, 256 for the network), nodes below this threshold will not be able to start database services. It is recommended to configure the maximum number of file handles as UNLIMITED, or set the value to 15000 (where each store requires 10000 file handles and 5000 for the network) or higher to support the performance requirements of database cluster growth.
+The database uses a large number of file handles, which usually exceeds the number of file handles available in LINUX by default. Therefore, it is recommended to modify the number of file handles for each database node: the maximum number of file handles needs to be set to at least 1956 (each store requires 1700 file handles, 256 for the network), nodes below this threshold will not be able to start database services. It is recommended to configure the maximum number of file handles as UNLIMITED, or set the value to 15000 (where each store requires 10000 file handles and 5000 for the network) or higher to support the performance requirements of database cluster growth. If there are 3 stores on a node, we recommend changing the hard limit to at least 35000 (10000 for each store and 5000 for the network).
 
 Taking Cent OS 7 as an example, the method to modify the number of handles is:
 
