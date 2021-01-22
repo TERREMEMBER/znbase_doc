@@ -142,29 +142,29 @@ a)     Obtain the ZNBase database file and upload it to "/usr/local/bin" under t
 
 b)    Generate local certificate: Create two new directories: "/opt/certs" is used to store the generated CA certificate and all nodes and client certificate and key files, some of which will be transferred to the node machine. "/opt/my-safe-directory" is used to store the generated CA key file, which will be used when creating certificates and keys for nodes and users later. 
 
-$ mkdir /opt/certs
+`$ mkdir /opt/certs`
 
-$ mkdir /opt/my-safe-directory
+`$ mkdir /opt/my-safe-directory`
 
 **2.**     **Generate Local Certificate **
 
 c)     Create CA certificate and key:
 
-$ drdb cert create-ca --certs-dir=/opt/certs --ca-key=/opt/my-safe-directory/ca.key
+`$ drdb cert create-ca --certs-dir=/opt/certs --ca-key=/opt/my-safe-directory/ca.key`
 
 d)    Create a certificate and key for the first node:
 
-$ drdb cert create-node <node1 internal IP address> <node1 external IP address> <node1 hostname>  <other common names for node1> localhost 127.0.0.1 <load balancer IP address> <load balancer hostname>  <other common names for load balancer instances> --certs-dir=/opt/certs --ca-key=/opt/my-safe-directory/ca.key 
+`$ drdb cert create-node <node1 internal IP address> <node1 external IP address> <node1 hostname>  <other common names for node1> localhost 127.0.0.1 <load balancer IP address> <load balancer hostname>  <other common names for load balancer instances> --certs-dir=/opt/certs --ca-key=/opt/my-safe-directory/ca.key `
 
 e)     Transfer the CA certificate, node certificate and key to the first node:
 
-$ ssh <username>@<node1 address> "mkdir /root/certs" 
+`$ ssh <username>@<node1 address> "mkdir /root/certs" `
 
-$ scp /opt/certs/ca.crt /opt/certs/node.crt /opt/certs/node.key <username>@<node1 address>:/root/certs 
+`$ scp /opt/certs/ca.crt /opt/certs/node.crt /opt/certs/node.key <username>@<node1 address>:/root/certs `
 
 f)     Delete the local node certificate and key:
 
-$ rm /opt/certs/node.crt /opt/certs/node.key
+`$ rm /opt/certs/node.crt /opt/certs/node.key`
 
 g)     Create a certificate and key for the second node:
 
