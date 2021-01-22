@@ -430,4 +430,4 @@ d)   Built-in tool workload for TPCC performance test
 
 ###### **2.3  Result analysis**
 
-​        200 database nodes, 4000 warehouse TPCC data, tmpC about 44662 
+​        200 database nodes, 4000 warehouse TPCC data, tmpC about 44662
