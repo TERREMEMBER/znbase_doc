@@ -146,7 +146,7 @@ b)    Generate local certificate: Create two new directories: "/opt/certs" is us
 
 `$ mkdir /opt/my-safe-directory`
 
-**2.**     **Generate Local Certificate **
+**2.**     Generate Local Certificate 
 
 c)     Create CA certificate and key:
 
@@ -168,23 +168,23 @@ f)     Delete the local node certificate and key:
 
 g)     Create a certificate and key for the second node:
 
-$ drdb cert create-node <node2 internal IP address> <node2 external IP address> <node2 hostname>  <other common names for node2> localhost 127.0.0.1 <load balancer IP address> <load balancer hostname>  <other common names for load balancer instances> --certs-dir=/opt/certs --ca-key=/opt/my-safe-directory/ca.key 
+`$ drdb cert create-node <node2 internal IP address> <node2 external IP address> <node2 hostname>  <other common names for node2> localhost 127.0.0.1 <load balancer IP address> <load balancer hostname>  <other common names for load balancer instances> --certs-dir=/opt/certs --ca-key=/opt/my-safe-directory/ca.key `
 
 h)    Transfer the CA certificate, node certificate and key to the second node:
 
-$ ssh <username>@<node2 address> "mkdir /root/certs" 
+`$ ssh <username>@<node2 address> "mkdir /root/certs" `
 
-$ scp /opt/certs/ca.crt /opt/certs/node.crt /opt/certs/node.key <username>@<node2 address>:/root/certs
+`$ scp /opt/certs/ca.crt /opt/certs/node.crt /opt/certs/node.key <username>@<node2 address>:/root/certs`
 
 i)      For each other cluster node that needs to install a certificate, please repeat steps f)-h).
 
 j)     Create a client certificate and key for the root user:
 
-$ drdb cert create-client root --certs-dir=/opt/certs --ca-key=/opt/my-safedirectory/ca.key 
+`$ drdb cert create-client root --certs-dir=/opt/certs --ca-key=/opt/my-safedirectory/ca.key `
 
 k)    Transfer the certificate and key to the machine where you want to execute the database command. The machine can be a node in the cluster or outside the cluster. The machine with the certificate can use the root account to execute the database command, which can be accessed through the node machine Cluster:
 
-$ ssh <username>@<workload address> "mkdir /root/certs" $ scp /opt/certs/ca.crt /opt/certs/client.root.crt /opt/certs/client.root.key <username>@<workload address>:/root/certs 
+`$ ssh <username>@<workload address> "mkdir /root/certs" $ scp /opt/certs/ca.crt /opt/certs/client.root.crt /opt/certs/client.root.key <username>@<workload address>:/root/certs` 
 
 l)     If you want to run database client commands on some other machine in the future, you need to copy the root user's certificate and key to that node. Only nodes with root user certificates and keys can access the cluster.
 
@@ -192,11 +192,11 @@ l)     If you want to run database client commands on some other machine in the 
 
 m)   SSH to the node machine that needs to start the service, obtain the database executable file, and upload it to the specified directory.
 
-$ cp -i drdb-v****.linux-amd64/drdb /usr/local/bin/ 
+`$ cp -i drdb-v****.linux-amd64/drdb /usr/local/bin/ `
 
 n)    Execute the database start command.
 
-$ drdb start --certs-dir=/root/certs --store=/opt/node1 --advertise-addr=<node1 address>:26257 --listen-addr=<node1 address>:26257 --http-addr=<node1 address>:8080 --join=<node1 address>,<node2 address>,<node3 address> -cache=.25 --max-sql-memory=.25 --background 
+`$ drdb start --certs-dir=/root/certs --store=/opt/node1 --advertise-addr=<node1 address>:26257 --listen-addr=<node1 address>:26257 --http-addr=<node1 address>:8080 --join=<node1 address>,<node2 address>,<node3 address> -cache=.25 --max-sql-memory=.25 --background `
 
 o)    Perform m)-n) steps for each node that needs to be added to the cluster.
 
@@ -217,7 +217,7 @@ o)    Perform m)-n) steps for each node that needs to be added to the cluster.
 
 p)    Execute the database init command on the first node of the cluster.（The node needs to have the certificate and key of the root user）
 
-$ drdb init --certs-dir=/root/certs --host=<address of any node> 
+`$ drdb init --certs-dir=/root/certs --host=<address of any node> `
 
 #### 3.4.3  Non-Security mode deployment and startup
 
@@ -231,7 +231,7 @@ b)    SSH to the node machine that needs to start the service, obtain the databa
 
 c)     Execute the database start command:
 
-$ drdb start --insecure --store=/opt/node1 --advertise-addr=<node1 address>:26257 --listen-addr=<node1 address>:26257 --http-addr=<node1 address>:8080 --join=<node1 address>,<node2 address>,<node3 address> -cache=.25 --max-sql-memory=.25 --background 
+`$ drdb start --insecure --store=/opt/node1 --advertise-addr=<node1 address>:26257 --listen-addr=<node1 address>:26257 --http-addr=<node1 address>:8080 --join=<node1 address>,<node2 address>,<node3 address> -cache=.25 --max-sql-memory=.25 --background `
 
 d)    Repeat steps b)-c) on other nodes in the cluster.
 
@@ -252,7 +252,7 @@ d)    Repeat steps b)-c) on other nodes in the cluster.
 
 e)    Execute the database ”init“ command on the first node of the cluster
 
- $ drdb init --insecure --host=<address of any node> 
+` $ drdb init --insecure --host=<address of any node> `
 
 <!--**Note: Risks of non-secure mode clusters:**-->
 
@@ -273,11 +273,11 @@ e)    Execute the database ”init“ command on the first node of the cluster
 
 ​    #security-mode startup
 
-​    $drdb sql --cert-dir=/root/certs --host=<address of any node>
+​ `   $drdb sql --cert-dir=/root/certs --host=<address of any node>`
 
 ​    #non-security-mode startup
 
-​    $drdb sql --insecure --host=<address of any node>
+​   ` $drdb sql --insecure --host=<address of any node>`
 
    b)    创建NODETEST数据库
 
@@ -291,17 +291,17 @@ e)    Execute the database ”init“ command on the first node of the cluster
 
 ​    #security-mode startup
 
-​    $drdb sql --cert-dir=/root/certs --host=<address of any node>
+​  `  $drdb sql --cert-dir=/root/certs --host=<address of any node>`
 
 ​    #non-security-mode startup
 
-​    $drdb sql --insecure --host=<address of any node>
+​  `  $drdb sql --insecure --host=<address of any node>`
 
    b)    Check the database
 
 > SHOW DATABASES;
 
-   c)     Use \q or CTRL+D to exit
+   c)     Use `\q` or `CTRL+D` to exit
 
 #### 3.4.5 Configure HAProxy Load Balancing
 
@@ -316,7 +316,7 @@ Each node in a database cluster is a SQL gateway for the cluster. However, in or
 
   a)     Generate HAPROXY configuration file
 
-   $ drdb gen haproxy --certs-dir=certs --host=<address of any node> 
+   `$ drdb gen haproxy --certs-dir=certs --host=<address of any node>` 
 
   By default, the HAPROXY.CFG file is automatically generated, and the configuration file is as follows:
 
@@ -339,15 +339,15 @@ Each node in a database cluster is a SQL gateway for the cluster. However, in or
 
   b)    Upload the CFG file to the HAPROXY machine to be run
 
-  $ scp haproxy.cfg <username>@<haproxy address>:~/ 
+  `$ scp haproxy.cfg <username>@<haproxy address>:~/ `
 
   c)     SSH to the running machine and install
 
-  $ apt-get install haproxy 
+  `$ apt-get install haproxy `
 
  d)    Start HAPROXY, use -f to point to the CFG file
 
-  $ haproxy -f haproxy.cfg 
+  `$ haproxy -f haproxy.cfg `
 
  e)     To use multiple HAPROXY instances, please repeat steps a)-d)
 
@@ -373,19 +373,19 @@ d)   Built-in tool workload for TPCC performance test
 
 - Load data (security mode):
 
-  drdb workload init tpcc 'postgresql://root@localhost:26257?sslcert=certs/client.root.crt&sslkey=certs/client.root.key&sslmode=verify-full&sslrootcert=certs/ca.crt'
+ ` drdb workload init tpcc 'postgresql://root@localhost:26257?sslcert=certs/client.root.crt&sslkey=certs/client.root.key&sslmode=verify-full&sslrootcert=certs/ca.crt'`
 
 - Perform the test (security mode):
 
-  drdb workload run tpcc --duration=1m 'postgresql://root@localhost:26257?sslcert=certs/client.root.crt&sslkey=certs/client.root.key&sslmode=verify-full&sslrootcert=certs/ca.crt'
+  `drdb workload run tpcc --duration=1m 'postgresql://root@localhost:26257?sslcert=certs/client.root.crt&sslkey=certs/client.root.key&sslmode=verify-full&sslrootcert=certs/ca.crt'`
 
 - Load data (non-security mode):
 
-  drdb workload init tpcc 'postgresql://root@localhost:26257?sslmode=disable'
+  `drdb workload init tpcc 'postgresql://root@localhost:26257?sslmode=disable'`
 
 - Perform the test (non-security mode):
 
-  drdb workload run tpcc --duration=1m 'postgresql://root@localhost:26257?sslmode=disable
+  `drdb workload run tpcc --duration=1m 'postgresql://root@localhost:26257?sslmode=disable`
 
 ######  **1.3  Result analysis**
 
@@ -413,20 +413,19 @@ d)   Built-in tool workload for TPCC performance test
 
 -  Load data (security mode):
 
-  drdb workload init tpcc 'postgresql://root@localhost:26257?sslcert=certs/client.root.crt&sslkey=certs/client.root.key&sslmode=verify-full&sslrootcert=certs/ca.crt'
+  `drdb workload init tpcc 'postgresql://root@localhost:26257?sslcert=certs/client.root.crt&sslkey=certs/client.root.key&sslmode=verify-full&sslrootcert=certs/ca.crt'`
 
 - Perform the test (security mode):
 
-  drdb workload run tpcc --duration=1m 'postgresql://root@localhost:26257?sslcert=certs/client.root.crt&sslkey=certs/client.root.key&sslmode=verify-full&sslrootcert=certs/ca.crt'
+  `drdb workload run tpcc --duration=1m 'postgresql://root@localhost:26257?sslcert=certs/client.root.crt&sslkey=certs/client.root.key&sslmode=verify-full&sslrootcert=certs/ca.crt'`
 
 - Load data (non-security mode):
 
-  drdb workload init tpcc 'postgresql://root@localhost:26257?sslmode=disable'
+  `drdb workload init tpcc 'postgresql://root@localhost:26257?sslmode=disable'`
 
 - Perform the test (non-security mode):
 
-
-​       drdb workload run tpcc --duration=1m 'postgresql://root@localhost:26257?sslmode=disable
+  `drdb workload run tpcc --duration=1m 'postgresql://root@localhost:26257?sslmode=disable`
 
 ###### **2.3  Result analysis**
 
