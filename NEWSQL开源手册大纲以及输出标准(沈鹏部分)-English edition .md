@@ -373,7 +373,7 @@ d)   Built-in tool workload for TPCC performance test
 
 - Load data (security mode):
 
- ` drdb workload init tpcc 'postgresql://root@localhost:26257?sslcert=certs/client.root.crt&sslkey=certs/client.root.key&sslmode=verify-full&sslrootcert=certs/ca.crt'`
+  `drdb workload init tpcc 'postgresql://root@localhost:26257?sslcert=certs/client.root.crt&sslkey=certs/client.root.key&sslmode=verify-full&sslrootcert=certs/ca.crt'`
 
 - Perform the test (security mode):
 
