@@ -59,11 +59,11 @@ Check the consistency of the operating system version in each node of the cluste
 
 #lsb_release –a 
 
-> No LSB modules are available. 
-> Distributor ID: Ubuntu 
-> Description: Ubuntu 16.04.6 LTS 
-> Release: 16.04 
-> Codename: xenial 
+> No LSB modules are available.  
+> Distributor ID: Ubuntu  
+> Description: Ubuntu 16.04.6 LTS  
+> Release: 16.04  
+> Codename: xenial   
 
 #### 3.2.2 The system time of the nodes in the cluster is consistent
 
@@ -72,8 +72,8 @@ A medium-strength clock synchronization mechanism is required in cluster nodes t
 #### 3.2.3 Whether the default port of the database service is occupied
 
 #lsof -i:26257 
-> COMMAND     PID  USER   FD   TYPE  DEVICE SIZE/OFF NODE NAME 
-> drdb 10583 jesse   12u  IPv6 3263391      0t0  TCP *:26257 (LISTEN)
+> COMMAND     PID  USER   FD   TYPE  DEVICE SIZE/OFF NODE NAME  
+> drdb 10583 jesse   12u  IPv6 3263391      0t0  TCP *:26257 (LISTEN)  
 
 If the port number conflicts with the database default port number, you can use the kill -9 pid_value command under the root user to terminate the conflicting process or modify the default port number when installing the database.
 
@@ -321,21 +321,21 @@ Each node in a database cluster is a SQL gateway for the cluster. However, in or
   By default, the HAPROXY.CFG file is automatically generated, and the configuration file is as follows:
 
 > Global  
->            maxconn 4096 
->            defaults  mode tcp 
->            Timeout values should be configured for your specific use. 
->            See: https://cbonte.github.io/haproxy-dconv/1.8/configuration.html#4timeout%20connect 
->            timeout connect     10s
->            timeout client      1m
->            timeout server      1m 
->            TCP keep-alive on client side. Server already enables them. option              
->            clitcpka listen psql bind :26257 
->            mode tcp 
->            balance roundrobin 
->            option httpchk GET /health?ready=1 
->            server drdb1 <node1 address>:26257 check port 8080 
->            server drdb2 <node2 address>:26257 check port 8080 
->            server drdb3 <node3 address>:26257 check port 8080
+>            maxconn 4096  
+>            defaults  mode tcp  
+>            Timeout values should be configured for your specific use.  
+>            See: https://cbonte.github.io/haproxy-dconv/1.8/configuration.html#4timeout%20connect  
+>            timeout connect     10s  
+>            timeout client      1m  
+>            timeout server      1m  
+>            TCP keep-alive on client side. Server already enables them. option             
+>            clitcpka listen psql bind :26257  
+>            mode tcp  
+>            balance roundrobin  
+>            option httpchk GET /health?ready=1  
+>            server drdb1 <node1 address>:26257 check port 8080  
+>            server drdb2 <node2 address>:26257 check port 8080  
+>            server drdb3 <node3 address>:26257 check port 8080  
 
   b)    Upload the CFG file to the HAPROXY machine to be run
 
